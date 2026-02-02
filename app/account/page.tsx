@@ -120,32 +120,32 @@ export default function AccountPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-zinc-900 flex flex-col">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         <Navigation />
         
         <div className="flex-1 p-4 pb-20 md:pb-4 max-w-4xl mx-auto w-full">
-          <h1 className="text-3xl font-bold text-white mb-8">Account</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Account</h1>
 
           {/* Status */}
-          <div className="bg-zinc-800 rounded-lg p-6 mb-6">
-            <h2 className="text-xl font-semibold text-white mb-4">Status</h2>
+          <div className="bg-white rounded-lg p-6 mb-6 border border-gray-200">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Status</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <div className="text-zinc-400 text-sm mb-1">Restzeit</div>
-                <div className="text-2xl font-bold text-white">
+                <div className="text-gray-600 text-sm mb-1">Restzeit</div>
+                <div className="text-2xl font-bold text-gray-900">
                   {formatRemainingTime(user.passValidUntil)}
                 </div>
               </div>
               <div>
-                <div className="text-zinc-400 text-sm mb-1">Verfügbare Coins</div>
-                <div className="text-2xl font-bold text-white">{user.coins}</div>
+                <div className="text-gray-600 text-sm mb-1">Verfügbare Coins</div>
+                <div className="text-2xl font-bold text-gray-900">{user.coins}</div>
               </div>
             </div>
           </div>
 
           {/* Package Redemption */}
-          <div className="bg-zinc-800 rounded-lg p-6 mb-6">
-            <h2 className="text-xl font-semibold text-white mb-4">Paket einlösen</h2>
+          <div className="bg-white rounded-lg p-6 mb-6 border border-gray-200">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Paket einlösen</h2>
             {redeemError && (
               <div className="bg-red-500/10 border border-red-500 rounded-lg p-3 mb-4 text-red-500 text-sm">
                 {redeemError}
@@ -157,9 +157,9 @@ export default function AccountPage() {
                   key={index}
                   onClick={() => handleRedeemPackage(index)}
                   disabled={loading || user.coins < pkg.coins}
-                  className="bg-zinc-700 rounded-lg p-4 hover:bg-zinc-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-gray-100 rounded-lg p-4 hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-gray-300"
                 >
-                  <div className="text-white font-semibold mb-2">{pkg.label}</div>
+                  <div className="text-gray-900 font-semibold mb-2">{pkg.label}</div>
                   <div className="text-2xl font-bold text-blue-500 mb-2">{pkg.coins} Coin{pkg.coins !== 1 ? 's' : ''}</div>
                   {user.coins < pkg.coins && (
                     <div className="text-red-400 text-xs">Nicht genug Coins</div>
@@ -167,16 +167,16 @@ export default function AccountPage() {
                 </button>
               ))}
             </div>
-            <p className="text-zinc-400 text-sm mt-4">
+            <p className="text-gray-600 text-sm mt-4">
               Hinweis: Pakete verlängern deine verbleibende Zeit und ersetzen sie nicht.
             </p>
           </div>
 
           {/* Coin History */}
-          <div className="bg-zinc-800 rounded-lg p-6 mb-6">
+          <div className="bg-white rounded-lg p-6 mb-6 border border-gray-200">
             <button
               onClick={() => setShowHistory(!showHistory)}
-              className="flex items-center justify-between w-full text-white"
+              className="flex items-center justify-between w-full text-gray-900"
             >
               <h2 className="text-xl font-semibold">Coin-Verlauf</h2>
               {showHistory ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
@@ -186,11 +186,11 @@ export default function AccountPage() {
               <div className="mt-4 space-y-2">
                 {transactions.length > 0 ? (
                   transactions.map(transaction => (
-                    <div key={transaction.id} className="bg-zinc-700 rounded-lg p-4">
+                    <div key={transaction.id} className="bg-gray-100 rounded-lg p-4 border border-gray-200">
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="text-white font-medium">{transaction.description}</div>
-                          <div className="text-zinc-400 text-sm">
+                          <div className="text-gray-900 font-medium">{transaction.description}</div>
+                          <div className="text-gray-600 text-sm">
                             {transaction.type === 'package_redeem' 
                               ? format(new Date(transaction.createdAt), 'd. MMM yyyy, HH:mm')
                               : format(new Date(transaction.createdAt), 'd. MMM yyyy')
@@ -204,17 +204,17 @@ export default function AccountPage() {
                     </div>
                   ))
                 ) : (
-                  <div className="text-zinc-400 text-center py-4">Keine Transaktionen vorhanden</div>
+                  <div className="text-gray-600 text-center py-4">Keine Transaktionen vorhanden</div>
                 )}
               </div>
             )}
           </div>
 
           {/* Password Change */}
-          <div className="bg-zinc-800 rounded-lg p-6">
+          <div className="bg-white rounded-lg p-6 border border-gray-200">
             <button
               onClick={() => setShowPasswordForm(!showPasswordForm)}
-              className="flex items-center justify-between w-full text-white mb-4"
+              className="flex items-center justify-between w-full text-gray-900 mb-4"
             >
               <h2 className="text-xl font-semibold">Passwort ändern</h2>
               {showPasswordForm ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
@@ -223,7 +223,7 @@ export default function AccountPage() {
             {showPasswordForm && (
               <form onSubmit={handlePasswordChange} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-zinc-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Aktuelles Passwort
                   </label>
                   <input
@@ -231,12 +231,12 @@ export default function AccountPage() {
                     value={currentPassword}
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     required
-                    className="w-full px-4 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-zinc-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
                     Neues Passwort
                   </label>
                   <input
@@ -244,7 +244,7 @@ export default function AccountPage() {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
-                    className="w-full px-4 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
 

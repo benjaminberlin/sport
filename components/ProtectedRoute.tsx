@@ -25,8 +25,8 @@ export default function ProtectedRoute({ children, adminOnly = false }: Protecte
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-zinc-900">
-        <div className="text-white">Laden...</div>
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+        <div className="text-gray-900">Laden...</div>
       </div>
     )
   }

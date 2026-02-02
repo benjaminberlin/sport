@@ -83,8 +83,8 @@ export default function TVGuidePage() {
   if (loading) {
     return (
       <ProtectedRoute>
-        <div className="flex min-h-screen items-center justify-center bg-zinc-900">
-          <div className="text-white">Laden...</div>
+        <div className="flex min-h-screen items-center justify-center bg-gray-50">
+          <div className="text-gray-900">Laden...</div>
         </div>
       </ProtectedRoute>
     )
@@ -92,31 +92,31 @@ export default function TVGuidePage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-zinc-900 flex flex-col">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         <Navigation />
         
         <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
           {/* Channel List */}
-          <div className="md:w-64 bg-zinc-800 border-r border-zinc-700 md:overflow-y-auto">
+          <div className="md:w-64 bg-white border-r border-gray-300 md:overflow-y-auto">
             <div className="p-4">
               <input
                 type="text"
                 placeholder="Sender suchen..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 md:hidden"
+                className="w-full px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4 md:hidden"
               />
-              <h2 className="text-white font-semibold mb-4">Sender</h2>
+              <h2 className="text-gray-900 font-semibold mb-4">Sender</h2>
               <div className="space-y-2">
                 {filteredChannels.map(channel => (
                   <div
                     key={channel.id}
-                    className="flex items-center gap-3 p-3 rounded-lg bg-zinc-700"
+                    className="flex items-center gap-3 p-3 rounded-lg bg-gray-100"
                   >
                     {channel.logoUrl && (
                       <img src={channel.logoUrl} alt={channel.name} className="w-10 h-10 object-contain" />
                     )}
-                    <div className="font-medium text-white">{channel.name}</div>
+                    <div className="font-medium text-gray-900">{channel.name}</div>
                   </div>
                 ))}
               </div>
@@ -127,7 +127,7 @@ export default function TVGuidePage() {
           <div className="flex-1 overflow-x-auto pb-20 md:pb-0">
             <div className="p-4">
               <div className="flex items-center justify-between mb-6">
-                <h1 className="text-2xl font-bold text-white">
+                <h1 className="text-2xl font-bold text-gray-900">
                   TV-Programm - {format(new Date(), 'EEEE, d. MMMM yyyy')}
                 </h1>
                 <input
@@ -135,7 +135,7 @@ export default function TVGuidePage() {
                   placeholder="Sender suchen..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="hidden md:block w-64 px-4 py-2 bg-zinc-700 border border-zinc-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="hidden md:block w-64 px-4 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
@@ -143,12 +143,12 @@ export default function TVGuidePage() {
                 {filteredChannels.map(channel => {
                   const channelPrograms = programs[channel.id] || []
                   return (
-                    <div key={channel.id} className="bg-zinc-800 rounded-lg p-4">
+                    <div key={channel.id} className="bg-white rounded-lg p-4 border border-gray-200">
                       <div className="flex items-center gap-3 mb-4">
                         {channel.logoUrl && (
                           <img src={channel.logoUrl} alt={channel.name} className="w-12 h-12 object-contain" />
                         )}
-                        <h3 className="text-lg font-semibold text-white">{channel.name}</h3>
+                        <h3 className="text-lg font-semibold text-gray-900">{channel.name}</h3>
                       </div>
 
                       {channelPrograms.length > 0 ? (
@@ -159,7 +159,7 @@ export default function TVGuidePage() {
                               className={`p-3 rounded-lg ${
                                 isCurrentProgram(program.startTime, program.endTime)
                                   ? 'bg-blue-600 text-white'
-                                  : 'bg-zinc-700 text-zinc-300'
+                                  : 'bg-gray-100 text-gray-700'
                               }`}
                             >
                               <div className="flex items-center gap-3">
@@ -177,7 +177,7 @@ export default function TVGuidePage() {
                           ))}
                         </div>
                       ) : (
-                        <div className="text-zinc-400 text-sm">Keine Programminformationen verfügbar</div>
+                        <div className="text-gray-600 text-sm">Keine Programminformationen verfügbar</div>
                       )}
                     </div>
                   )

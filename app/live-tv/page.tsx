@@ -93,8 +93,8 @@ export default function LiveTVPage() {
   if (loading) {
     return (
       <ProtectedRoute>
-        <div className="flex min-h-screen items-center justify-center bg-zinc-900">
-          <div className="text-white">Laden...</div>
+        <div className="flex min-h-screen items-center justify-center bg-gray-50">
+          <div className="text-gray-900">Laden...</div>
         </div>
       </ProtectedRoute>
     )
@@ -102,16 +102,16 @@ export default function LiveTVPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-zinc-900 flex flex-col">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         <Navigation />
         
         {showWarning && (
           <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-yellow-500 text-black px-6 py-3 rounded-lg shadow-lg flex items-center gap-4">
             <span>Dein Pass läuft in 30 Minuten ab!</span>
-            <Link href="/account" className="px-4 py-2 bg-black text-white rounded hover:bg-zinc-800">
+            <Link href="/account" className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800">
               Paket einlösen
             </Link>
-            <button onClick={() => setShowWarning(false)} className="px-4 py-2 bg-zinc-700 text-white rounded hover:bg-zinc-600">
+            <button onClick={() => setShowWarning(false)} className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600">
               Abbrechen
             </button>
           </div>
@@ -119,9 +119,9 @@ export default function LiveTVPage() {
 
         <div className="flex-1 flex flex-col md:flex-row">
           {/* Channel List - Desktop */}
-          <div className="hidden md:block w-80 bg-zinc-800 border-r border-zinc-700 overflow-y-auto">
+          <div className="hidden md:block w-80 bg-white border-r border-gray-300 overflow-y-auto">
             <div className="p-4">
-              <h2 className="text-white font-semibold mb-4">Sender</h2>
+              <h2 className="text-gray-900 font-semibold mb-4">Sender</h2>
               <div className="space-y-2">
                 {channels.map(channel => (
                   <button
@@ -130,7 +130,7 @@ export default function LiveTVPage() {
                     className={`w-full flex items-center gap-3 p-3 rounded-lg transition-colors ${
                       selectedChannel?.id === channel.id
                         ? 'bg-blue-600 text-white'
-                        : 'bg-zinc-700 text-zinc-300 hover:bg-zinc-600'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                   >
                     {channel.logoUrl && (
@@ -139,7 +139,7 @@ export default function LiveTVPage() {
                     <div className="flex-1 text-left">
                       <div className="font-medium">{channel.name}</div>
                       {selectedChannel?.id === channel.id && currentProgram && (
-                        <div className="text-xs text-zinc-300 mt-1">{currentProgram.title}</div>
+                        <div className={`text-xs mt-1 ${selectedChannel?.id === channel.id ? 'text-blue-100' : 'text-gray-700'}`}>{currentProgram.title}</div>
                       )}
                     </div>
                   </button>
@@ -149,15 +149,15 @@ export default function LiveTVPage() {
           </div>
 
           {/* Mobile Channel List */}
-          <div className={`md:hidden bg-zinc-800 border-b border-zinc-700 ${mobileChannelListOpen ? 'block' : 'hidden'}`}>
+          <div className={`md:hidden bg-white border-b border-gray-300 ${mobileChannelListOpen ? 'block' : 'hidden'}`}>
             <div className="p-4 max-h-64 overflow-y-auto">
-              <h2 className="text-white font-semibold mb-4">Sender auswählen</h2>
+              <h2 className="text-gray-900 font-semibold mb-4">Sender auswählen</h2>
               <div className="space-y-2">
                 {channels.map(channel => (
                   <button
                     key={channel.id}
                     onClick={() => handleChannelSelect(channel)}
-                    className="w-full flex items-center gap-3 p-3 rounded-lg bg-zinc-700 text-zinc-300 hover:bg-zinc-600"
+                    className="w-full flex items-center gap-3 p-3 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200"
                   >
                     {channel.logoUrl && (
                       <img src={channel.logoUrl} alt={channel.name} className="w-10 h-10 object-contain" />
@@ -174,7 +174,7 @@ export default function LiveTVPage() {
             {!userHasValidPass && (
               <div className="bg-red-500/10 border border-red-500 rounded-lg p-4 mb-4">
                 <p className="text-red-500 font-medium">Deine Restzeit ist abgelaufen. Bitte löse ein Paket ein.</p>
-                <p className="text-zinc-400 mt-1">Verfügbare Coins: {user?.coins || 0}</p>
+                <p className="text-gray-600 mt-1">Verfügbare Coins: {user?.coins || 0}</p>
                 <Link href="/account" className="inline-block mt-3 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
                   Paket einlösen
                 </Link>
@@ -184,7 +184,7 @@ export default function LiveTVPage() {
             <div className="md:hidden mb-4">
               <button
                 onClick={() => setMobileChannelListOpen(!mobileChannelListOpen)}
-                className="w-full py-2 bg-zinc-700 text-white rounded-lg hover:bg-zinc-600"
+                className="w-full py-2 bg-gray-200 text-gray-900 rounded-lg hover:bg-gray-300"
               >
                 {mobileChannelListOpen ? 'Sender ausblenden' : 'Sender anzeigen'}
               </button>
@@ -193,9 +193,9 @@ export default function LiveTVPage() {
             {selectedChannel ? (
               <>
                 <div className="mb-4">
-                  <h1 className="text-2xl font-bold text-white">{selectedChannel.name}</h1>
+                  <h1 className="text-2xl font-bold text-gray-900">{selectedChannel.name}</h1>
                   {currentProgram && (
-                    <p className="text-zinc-400 mt-1">{currentProgram.title}</p>
+                    <p className="text-gray-600 mt-1">{currentProgram.title}</p>
                   )}
                 </div>
                 <VideoPlayer
@@ -205,7 +205,7 @@ export default function LiveTVPage() {
                 />
               </>
             ) : (
-              <div className="flex items-center justify-center flex-1 text-zinc-400">
+              <div className="flex items-center justify-center flex-1 text-gray-600">
                 Kein Sender ausgewählt
               </div>
             )}

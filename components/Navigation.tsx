@@ -27,7 +27,7 @@ export default function Navigation() {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="hidden md:flex bg-zinc-900 border-b border-zinc-800">
+      <nav className="hidden md:flex bg-white border-b border-gray-300">
         <div className="w-full flex items-center px-4">
           {navItems.map(item => (
             <Link
@@ -35,8 +35,8 @@ export default function Navigation() {
               href={item.href}
               className={`flex items-center gap-2 px-4 py-4 text-sm font-medium transition-colors ${
                 pathname === item.href
-                  ? 'text-white border-b-2 border-blue-500'
-                  : 'text-zinc-400 hover:text-white'
+                  ? 'text-gray-900 border-b-2 border-blue-500'
+                  : 'text-gray-600 hover:text-gray-900'
               }`}
             >
               <item.icon className="w-4 h-4" />
@@ -45,7 +45,7 @@ export default function Navigation() {
           ))}
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 px-4 py-4 text-sm font-medium text-zinc-400 hover:text-white transition-colors ml-auto"
+            className="flex items-center gap-2 px-4 py-4 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors ml-auto"
           >
             <LogOut className="w-4 h-4" />
             Logout
@@ -54,14 +54,14 @@ export default function Navigation() {
       </nav>
 
       {/* Mobile Navigation */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-zinc-900 border-t border-zinc-800 z-50">
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-300 z-50">
         <div className="flex justify-around items-center py-2">
           {navItems.map(item => (
             <Link
               key={item.href}
               href={item.href}
               className={`flex flex-col items-center gap-1 p-2 ${
-                pathname === item.href ? 'text-blue-500' : 'text-zinc-400'
+                pathname === item.href ? 'text-blue-500' : 'text-gray-600'
               }`}
             >
               <item.icon className="w-5 h-5" />
@@ -69,7 +69,7 @@ export default function Navigation() {
           ))}
           <button
             onClick={handleLogout}
-            className="flex flex-col items-center gap-1 p-2 text-zinc-400"
+            className="flex flex-col items-center gap-1 p-2 text-gray-600"
           >
             <LogOut className="w-5 h-5" />
           </button>

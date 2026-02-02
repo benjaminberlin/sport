@@ -128,8 +128,8 @@ export default function UsersPage() {
   if (loading) {
     return (
       <ProtectedRoute adminOnly>
-        <div className="flex min-h-screen items-center justify-center bg-zinc-900">
-          <div className="text-white">Laden...</div>
+        <div className="flex min-h-screen items-center justify-center bg-gray-50">
+          <div className="text-gray-900">Laden...</div>
         </div>
       </ProtectedRoute>
     )
@@ -137,38 +137,38 @@ export default function UsersPage() {
 
   return (
     <ProtectedRoute adminOnly>
-      <div className="min-h-screen bg-zinc-900 flex flex-col">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         <Navigation />
         
         <div className="flex-1 p-4 pb-20 md:pb-4">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-3xl font-bold text-white mb-8">Benutzerverwaltung</h1>
+            <h1 className="text-3xl font-bold text-gray-900 mb-8">Benutzerverwaltung</h1>
 
             {/* Desktop Table */}
-            <div className="hidden md:block bg-zinc-800 rounded-lg overflow-hidden">
+            <div className="hidden md:block bg-white rounded-lg overflow-hidden border border-gray-200">
               <table className="w-full">
-                <thead className="bg-zinc-700">
+                <thead className="bg-gray-100">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-white">Online</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-white">Benutzername</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-white">Rolle</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-white">Coins</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-white">Zuletzt Online</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-white">Pass gültig bis</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-white">Aktionen</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Online</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Benutzername</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Rolle</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Coins</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Zuletzt Online</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Pass gültig bis</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-900">Aktionen</th>
                   </tr>
                 </thead>
                 <tbody>
                   {users.map((user, index) => (
-                    <tr key={user.id} className={index % 2 === 0 ? 'bg-zinc-800' : 'bg-zinc-750'}>
+                    <tr key={user.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                       <td className="px-4 py-3">
                         <Circle
-                          className={`w-3 h-3 ${isOnline(user.lastOnline) ? 'text-green-500 fill-green-500' : 'text-zinc-600'}`}
+                          className={`w-3 h-3 ${isOnline(user.lastOnline) ? 'text-green-500 fill-green-500' : 'text-gray-400'}`}
                         />
                       </td>
-                      <td className="px-4 py-3 text-white">{user.username}</td>
+                      <td className="px-4 py-3 text-gray-900">{user.username}</td>
                       <td className="px-4 py-3">
-                        <span className={`px-2 py-1 rounded text-xs ${user.role === 'admin' ? 'bg-purple-500 text-white' : 'bg-zinc-600 text-zinc-300'}`}>
+                        <span className={`px-2 py-1 rounded text-xs ${user.role === 'admin' ? 'bg-purple-500 text-white' : 'bg-gray-300 text-gray-700'}`}>
                           {user.role}
                         </span>
                       </td>
@@ -180,7 +180,7 @@ export default function UsersPage() {
                           >
                             <Minus className="w-4 h-4" />
                           </button>
-                          <span className="text-white font-medium w-8 text-center">{user.coins}</span>
+                          <span className="text-gray-900 font-medium w-8 text-center">{user.coins}</span>
                           <button
                             onClick={() => handleCoinChange(user.id, 'add_coins', 1)}
                             className="p-1 bg-green-600 hover:bg-green-700 rounded text-white"
@@ -189,10 +189,10 @@ export default function UsersPage() {
                           </button>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-zinc-300 text-sm">
+                      <td className="px-4 py-3 text-gray-700 text-sm">
                         {user.lastOnline ? format(new Date(user.lastOnline), 'd. MMM yyyy, HH:mm') : '-'}
                       </td>
-                      <td className="px-4 py-3 text-zinc-300 text-sm">
+                      <td className="px-4 py-3 text-gray-700 text-sm">
                         {user.passValidUntil ? format(new Date(user.passValidUntil), 'd. MMM yyyy, HH:mm') : '-'}
                       </td>
                       <td className="px-4 py-3">
@@ -225,22 +225,22 @@ export default function UsersPage() {
             {/* Mobile Cards */}
             <div className="md:hidden space-y-4">
               {users.map(user => (
-                <div key={user.id} className="bg-zinc-800 rounded-lg p-4">
+                <div key={user.id} className="bg-white rounded-lg p-4 border border-gray-200">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <Circle
-                        className={`w-3 h-3 ${isOnline(user.lastOnline) ? 'text-green-500 fill-green-500' : 'text-zinc-600'}`}
+                        className={`w-3 h-3 ${isOnline(user.lastOnline) ? 'text-green-500 fill-green-500' : 'text-gray-400'}`}
                       />
-                      <span className="text-white font-semibold">{user.username}</span>
+                      <span className="text-gray-900 font-semibold">{user.username}</span>
                     </div>
-                    <span className={`px-2 py-1 rounded text-xs ${user.role === 'admin' ? 'bg-purple-500 text-white' : 'bg-zinc-600 text-zinc-300'}`}>
+                    <span className={`px-2 py-1 rounded text-xs ${user.role === 'admin' ? 'bg-purple-500 text-white' : 'bg-gray-300 text-gray-700'}`}>
                       {user.role}
                     </span>
                   </div>
 
                   <div className="space-y-2 text-sm mb-3">
                     <div className="flex justify-between">
-                      <span className="text-zinc-400">Coins:</span>
+                      <span className="text-gray-600">Coins:</span>
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => handleCoinChange(user.id, 'remove_coins', 1)}
@@ -248,7 +248,7 @@ export default function UsersPage() {
                         >
                           <Minus className="w-3 h-3" />
                         </button>
-                        <span className="text-white font-medium w-6 text-center">{user.coins}</span>
+                        <span className="text-gray-900 font-medium w-6 text-center">{user.coins}</span>
                         <button
                           onClick={() => handleCoinChange(user.id, 'add_coins', 1)}
                           className="p-1 bg-green-600 hover:bg-green-700 rounded text-white"
@@ -258,14 +258,14 @@ export default function UsersPage() {
                       </div>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-zinc-400">Zuletzt Online:</span>
-                      <span className="text-zinc-300">
+                      <span className="text-gray-600">Zuletzt Online:</span>
+                      <span className="text-gray-700">
                         {user.lastOnline ? format(new Date(user.lastOnline), 'd. MMM, HH:mm') : '-'}
                       </span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-zinc-400">Pass gültig bis:</span>
-                      <span className="text-zinc-300">
+                      <span className="text-gray-600">Pass gültig bis:</span>
+                      <span className="text-gray-700">
                         {user.passValidUntil ? format(new Date(user.passValidUntil), 'd. MMM, HH:mm') : '-'}
                       </span>
                     </div>
@@ -297,12 +297,12 @@ export default function UsersPage() {
         {/* Edit Modal */}
         {showEditModal && editingUser && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-            <div className="bg-zinc-800 rounded-lg p-6 max-w-md w-full">
-              <h2 className="text-xl font-semibold text-white mb-4">Benutzer bearbeiten</h2>
+            <div className="bg-white rounded-lg p-6 max-w-md w-full border border-gray-200">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Benutzer bearbeiten</h2>
               
               <div className="space-y-4">
                 <div>
-                  <label className="flex items-center gap-2 text-white">
+                  <label className="flex items-center gap-2 text-gray-900">
                     <input
                       type="checkbox"
                       checked={editingUser.moviesEnabled}
@@ -314,7 +314,7 @@ export default function UsersPage() {
                 </div>
 
                 <div>
-                  <label className="flex items-center gap-2 text-white">
+                  <label className="flex items-center gap-2 text-gray-900">
                     <input
                       type="checkbox"
                       checked={editingUser.seriesEnabled}
@@ -347,7 +347,7 @@ export default function UsersPage() {
                       setShowEditModal(false)
                       setEditingUser(null)
                     }}
-                    className="flex-1 py-2 bg-zinc-600 hover:bg-zinc-700 rounded text-white"
+                    className="flex-1 py-2 bg-gray-300 hover:bg-gray-400 rounded text-gray-900"
                   >
                     Abbrechen
                   </button>

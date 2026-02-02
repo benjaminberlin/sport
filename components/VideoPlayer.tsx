@@ -54,10 +54,10 @@ export default function VideoPlayer({ src, hasValidPass, remainingMinutes, onWar
       />
       
       {!hasValidPass && (
-        <div className="absolute inset-0 backdrop-blur-sm bg-black/50 flex items-center justify-center">
-          <div className="text-white text-center p-8">
+        <div className="absolute inset-0 backdrop-blur-sm bg-white/90 flex items-center justify-center">
+          <div className="text-gray-900 text-center p-8">
             <p className="text-xl mb-2">Zugriff gesperrt</p>
-            <p className="text-sm text-zinc-300">Dein Pass ist abgelaufen</p>
+            <p className="text-sm text-gray-700">Dein Pass ist abgelaufen</p>
           </div>
         </div>
       )}

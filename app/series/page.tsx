@@ -74,10 +74,10 @@ export default function SeriesPage() {
   if (!user?.seriesEnabled) {
     return (
       <ProtectedRoute>
-        <div className="min-h-screen bg-zinc-900 flex flex-col">
+        <div className="min-h-screen bg-gray-50 flex flex-col">
           <Navigation />
           <div className="flex-1 flex items-center justify-center">
-            <div className="text-center text-zinc-400">
+            <div className="text-center text-gray-600">
               <p className="text-xl">Serien sind für deinen Account nicht freigeschaltet.</p>
             </div>
           </div>
@@ -89,8 +89,8 @@ export default function SeriesPage() {
   if (loading) {
     return (
       <ProtectedRoute>
-        <div className="flex min-h-screen items-center justify-center bg-zinc-900">
-          <div className="text-white">Laden...</div>
+        <div className="flex min-h-screen items-center justify-center bg-gray-50">
+          <div className="text-gray-900">Laden...</div>
         </div>
       </ProtectedRoute>
     )
@@ -98,17 +98,17 @@ export default function SeriesPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-zinc-900 flex flex-col">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         <Navigation />
         
         <div className="flex-1 p-4 pb-20 md:pb-4">
           <div className="max-w-7xl mx-auto">
             {!selectedSeries ? (
               <>
-                <h1 className="text-3xl font-bold text-white mb-8">Serien</h1>
+                <h1 className="text-3xl font-bold text-gray-900 mb-8">Serien</h1>
 
                 {seriesList.length === 0 ? (
-                  <div className="text-center text-zinc-400 py-12">
+                  <div className="text-center text-gray-600 py-12">
                     <p className="text-xl">Keine Serien verfügbar</p>
                   </div>
                 ) : (
@@ -120,7 +120,7 @@ export default function SeriesPage() {
                           setSelectedSeries(series)
                           setExpandedSeasons({ 1: true })
                         }}
-                        className="group relative aspect-[2/3] bg-zinc-800 rounded-lg overflow-hidden hover:ring-2 hover:ring-blue-500 transition-all"
+                        className="group relative aspect-[2/3] bg-gray-100 rounded-lg overflow-hidden hover:ring-2 hover:ring-blue-500 transition-all border border-gray-300"
                       >
                         {series.posterUrl ? (
                           <img
@@ -129,8 +129,8 @@ export default function SeriesPage() {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-zinc-700">
-                            <span className="text-zinc-500">Kein Poster</span>
+                          <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                            <span className="text-gray-500">Kein Poster</span>
                           </div>
                         )}
                         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -139,7 +139,7 @@ export default function SeriesPage() {
                         <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
                           <p className="text-white text-sm font-medium truncate">{series.title}</p>
                           {series.year && (
-                            <p className="text-zinc-300 text-xs">{series.year}</p>
+                            <p className="text-gray-300 text-xs">{series.year}</p>
                           )}
                         </div>
                       </button>
@@ -158,7 +158,7 @@ export default function SeriesPage() {
 
                 <div className="flex flex-col md:flex-row gap-8 mb-8">
                   {selectedSeries.posterUrl && (
-                    <div className="w-full md:w-64 aspect-[2/3] bg-zinc-800 rounded-lg overflow-hidden flex-shrink-0">
+                    <div className="w-full md:w-64 aspect-[2/3] bg-gray-100 rounded-lg overflow-hidden flex-shrink-0 border border-gray-300">
                       <img
                         src={selectedSeries.posterUrl}
                         alt={selectedSeries.title}
@@ -167,30 +167,30 @@ export default function SeriesPage() {
                     </div>
                   )}
                   <div className="flex-1">
-                    <h1 className="text-3xl font-bold text-white mb-4">{selectedSeries.title}</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 mb-4">{selectedSeries.title}</h1>
                     {selectedSeries.year && (
-                      <p className="text-zinc-400 mb-4">{selectedSeries.year}</p>
+                      <p className="text-gray-600 mb-4">{selectedSeries.year}</p>
                     )}
                     {selectedSeries.description && (
-                      <p className="text-zinc-300">{selectedSeries.description}</p>
+                      <p className="text-gray-700">{selectedSeries.description}</p>
                     )}
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   {getSeasons(selectedSeries.episodes).map(([seasonNumber, episodes]) => (
-                    <div key={seasonNumber} className="bg-zinc-800 rounded-lg overflow-hidden">
+                    <div key={seasonNumber} className="bg-white rounded-lg overflow-hidden border border-gray-200">
                       <button
                         onClick={() => toggleSeason(seasonNumber)}
-                        className="w-full flex items-center justify-between p-4 hover:bg-zinc-700 transition-colors"
+                        className="w-full flex items-center justify-between p-4 hover:bg-gray-100 transition-colors"
                       >
-                        <h2 className="text-xl font-semibold text-white">
+                        <h2 className="text-xl font-semibold text-gray-900">
                           Staffel {seasonNumber}
                         </h2>
                         {expandedSeasons[seasonNumber] ? (
-                          <ChevronUp className="w-5 h-5 text-white" />
+                          <ChevronUp className="w-5 h-5 text-gray-900" />
                         ) : (
-                          <ChevronDown className="w-5 h-5 text-white" />
+                          <ChevronDown className="w-5 h-5 text-gray-900" />
                         )}
                       </button>
 
@@ -200,23 +200,23 @@ export default function SeriesPage() {
                             <button
                               key={episode.id}
                               onClick={() => setSelectedEpisode(episode)}
-                              className="w-full flex items-center gap-4 p-3 bg-zinc-700 hover:bg-zinc-600 rounded-lg transition-colors text-left"
+                              className="w-full flex items-center gap-4 p-3 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors text-left border border-gray-300"
                             >
-                              <div className="flex-shrink-0 w-12 h-12 bg-zinc-600 rounded flex items-center justify-center">
-                                <Play className="w-6 h-6 text-white" />
+                              <div className="flex-shrink-0 w-12 h-12 bg-gray-300 rounded flex items-center justify-center">
+                                <Play className="w-6 h-6 text-gray-900" />
                               </div>
                               <div className="flex-1">
-                                <div className="text-white font-medium">
+                                <div className="text-gray-900 font-medium">
                                   {episode.episodeNumber}. {episode.title}
                                 </div>
                                 {episode.description && (
-                                  <div className="text-zinc-400 text-sm line-clamp-1">
+                                  <div className="text-gray-600 text-sm line-clamp-1">
                                     {episode.description}
                                   </div>
                                 )}
                               </div>
                               {episode.duration && (
-                                <div className="text-zinc-400 text-sm">
+                                <div className="text-gray-600 text-sm">
                                   {episode.duration} min
                                 </div>
                               )}
@@ -236,7 +236,7 @@ export default function SeriesPage() {
         {selectedEpisode && (
           <div className="fixed inset-0 bg-black/90 flex items-center justify-center p-4 z-50">
             <div className="w-full max-w-5xl">
-              <div className="bg-zinc-800 rounded-lg overflow-hidden">
+              <div className="bg-white rounded-lg overflow-hidden">
                 <div className="aspect-video bg-black">
                   <video
                     src={selectedEpisode.videoUrl}
@@ -246,20 +246,20 @@ export default function SeriesPage() {
                   />
                 </div>
                 <div className="p-6">
-                  <h2 className="text-2xl font-bold text-white mb-2">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
                     S{selectedEpisode.seasonNumber}E{selectedEpisode.episodeNumber}: {selectedEpisode.title}
                   </h2>
                   {selectedEpisode.duration && (
-                    <div className="text-zinc-400 text-sm mb-4">
+                    <div className="text-gray-600 text-sm mb-4">
                       {Math.floor(selectedEpisode.duration / 60)} min
                     </div>
                   )}
                   {selectedEpisode.description && (
-                    <p className="text-zinc-300 mb-4">{selectedEpisode.description}</p>
+                    <p className="text-gray-700 mb-4">{selectedEpisode.description}</p>
                   )}
                   <button
                     onClick={() => setSelectedEpisode(null)}
-                    className="px-6 py-2 bg-zinc-700 hover:bg-zinc-600 text-white rounded-lg"
+                    className="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-900 rounded-lg"
                   >
                     Schließen
                   </button>
