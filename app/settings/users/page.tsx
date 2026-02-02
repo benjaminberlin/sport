@@ -46,7 +46,7 @@ export default function UsersPage() {
     }
   }
 
-  const handleCoinChange = async (userId: string, action: 'add' | 'subtract', amount: number) => {
+  const handleCoinChange = async (userId: string, action: 'add_coins' | 'remove_coins', amount: number) => {
     try {
       const response = await fetch('/api/admin/users', {
         method: 'POST',
@@ -65,21 +65,34 @@ export default function UsersPage() {
     }
   }
 
-  const handleUpdateUser = async (userId: string, updates: Partial<User>) => {
+  const handleUpdateUser = async (userId: string, updates: { moviesEnabled?: boolean, seriesEnabled?: boolean }) => {
     try {
-      const response = await fetch('/api/admin/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ userId, action: 'update', ...updates })
-      })
-
-      if (response.ok) {
-        await fetchUsers()
-        setShowEditModal(false)
+      // Toggle movies if changed
+      if (updates.moviesEnabled !== undefined) {
+        await fetch('/api/admin/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ userId, action: 'toggle_movies' })
+        })
       }
+
+      // Toggle series if changed
+      if (updates.seriesEnabled !== undefined) {
+        await fetch('/api/admin/users', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ userId, action: 'toggle_series' })
+        })
+      }
+
+      await fetchUsers()
+      setShowEditModal(false)
     } catch (error) {
       console.error('Failed to update user:', error)
     }
@@ -162,14 +175,14 @@ export default function UsersPage() {
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
                           <button
-                            onClick={() => handleCoinChange(user.id, 'subtract', 1)}
+                            onClick={() => handleCoinChange(user.id, 'remove_coins', 1)}
                             className="p-1 bg-red-600 hover:bg-red-700 rounded text-white"
                           >
                             <Minus className="w-4 h-4" />
                           </button>
                           <span className="text-white font-medium w-8 text-center">{user.coins}</span>
                           <button
-                            onClick={() => handleCoinChange(user.id, 'add', 1)}
+                            onClick={() => handleCoinChange(user.id, 'add_coins', 1)}
                             className="p-1 bg-green-600 hover:bg-green-700 rounded text-white"
                           >
                             <Plus className="w-4 h-4" />
@@ -230,14 +243,14 @@ export default function UsersPage() {
                       <span className="text-zinc-400">Coins:</span>
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => handleCoinChange(user.id, 'subtract', 1)}
+                          onClick={() => handleCoinChange(user.id, 'remove_coins', 1)}
                           className="p-1 bg-red-600 hover:bg-red-700 rounded text-white"
                         >
                           <Minus className="w-3 h-3" />
                         </button>
                         <span className="text-white font-medium w-6 text-center">{user.coins}</span>
                         <button
-                          onClick={() => handleCoinChange(user.id, 'add', 1)}
+                          onClick={() => handleCoinChange(user.id, 'add_coins', 1)}
                           className="p-1 bg-green-600 hover:bg-green-700 rounded text-white"
                         >
                           <Plus className="w-3 h-3" />
@@ -314,10 +327,17 @@ export default function UsersPage() {
 
                 <div className="flex gap-2 mt-6">
                   <button
-                    onClick={() => handleUpdateUser(editingUser.id, {
-                      moviesEnabled: editingUser.moviesEnabled,
-                      seriesEnabled: editingUser.seriesEnabled
-                    })}
+                    onClick={() => {
+                      const updates: { moviesEnabled?: boolean, seriesEnabled?: boolean } = {}
+                      const currentUser = users.find(u => u.id === editingUser.id)
+                      if (currentUser && currentUser.moviesEnabled !== editingUser.moviesEnabled) {
+                        updates.moviesEnabled = editingUser.moviesEnabled
+                      }
+                      if (currentUser && currentUser.seriesEnabled !== editingUser.seriesEnabled) {
+                        updates.seriesEnabled = editingUser.seriesEnabled
+                      }
+                      handleUpdateUser(editingUser.id, updates)
+                    }}
                     className="flex-1 py-2 bg-blue-600 hover:bg-blue-700 rounded text-white"
                   >
                     Speichern
