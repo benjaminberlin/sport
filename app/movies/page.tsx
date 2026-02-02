@@ -105,7 +105,7 @@ export default function MoviesPage() {
                     <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
                       <p className="text-white text-sm font-medium truncate">{movie.title}</p>
                       {movie.year && (
-                        <p className="text-gray-300 text-xs">{movie.year}</p>
+                        <p className="text-gray-100 text-xs">{movie.year}</p>
                       )}
                     </div>
                   </button>

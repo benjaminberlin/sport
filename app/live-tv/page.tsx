@@ -139,7 +139,7 @@ export default function LiveTVPage() {
                     <div className="flex-1 text-left">
                       <div className="font-medium">{channel.name}</div>
                       {selectedChannel?.id === channel.id && currentProgram && (
-                        <div className={`text-xs mt-1 ${selectedChannel?.id === channel.id ? 'text-blue-100' : 'text-gray-700'}`}>{currentProgram.title}</div>
+                        <div className={`text-xs mt-1 ${selectedChannel?.id === channel.id ? 'text-blue-50' : 'text-gray-700'}`}>{currentProgram.title}</div>
                       )}
                     </div>
                   </button>

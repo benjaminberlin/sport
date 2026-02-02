@@ -139,7 +139,7 @@ export default function SeriesPage() {
                         <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
                           <p className="text-white text-sm font-medium truncate">{series.title}</p>
                           {series.year && (
-                            <p className="text-gray-300 text-xs">{series.year}</p>
+                            <p className="text-gray-100 text-xs">{series.year}</p>
                           )}
                         </div>
                       </button>
