@@ -108,7 +108,7 @@ export default function LiveTVPage() {
         {showWarning && (
           <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-yellow-500 text-black px-6 py-3 rounded-lg shadow-lg flex items-center gap-4">
             <span>Dein Pass läuft in 30 Minuten ab!</span>
-            <Link href="/account" className="px-4 py-2 bg-black text-white rounded hover:bg-gray-800">
+            <Link href="/account" className="px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-800">
               Paket einlösen
             </Link>
             <button onClick={() => setShowWarning(false)} className="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600">
@@ -139,7 +139,7 @@ export default function LiveTVPage() {
                     <div className="flex-1 text-left">
                       <div className="font-medium">{channel.name}</div>
                       {selectedChannel?.id === channel.id && currentProgram && (
-                        <div className={`text-xs mt-1 ${selectedChannel?.id === channel.id ? 'text-blue-50' : 'text-gray-700'}`}>{currentProgram.title}</div>
+                        <div className="text-xs text-blue-50 mt-1">{currentProgram.title}</div>
                       )}
                     </div>
                   </button>
