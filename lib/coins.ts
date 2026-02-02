@@ -7,8 +7,8 @@ export interface CoinPackage {
 
 export const COIN_PACKAGES: CoinPackage[] = [
   { hours: 24, coins: 1, label: '24 Stunden' },
-  { hours: 168, coins: 3, label: '7 Tage' },
-  { hours: 720, coins: 5, label: '30 Tage' }
+  { hours: 168, coins: 3, label: '7 Tage' },  // 7 * 24 = 168 hours
+  { hours: 720, coins: 5, label: '30 Tage' }  // 30 * 24 = 720 hours (approximate month)
 ]
 
 // Calculate new pass valid until date when redeeming a package

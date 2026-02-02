@@ -217,7 +217,7 @@ export default function SeriesPage() {
                               </div>
                               {episode.duration && (
                                 <div className="text-zinc-400 text-sm">
-                                  {Math.floor(episode.duration / 60)} min
+                                  {episode.duration} min
                                 </div>
                               )}
                             </button>

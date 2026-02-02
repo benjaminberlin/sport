@@ -12,8 +12,8 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Delete session
-    await prisma.session.delete({
+    // Delete session - use deleteMany to avoid error if session doesn't exist
+    await prisma.session.deleteMany({
       where: { token }
     })
 

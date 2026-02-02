@@ -3,13 +3,11 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/AuthContext'
-import { Tv, Calendar, User, Settings, Film, Clapperboard, LogOut, Menu, X } from 'lucide-react'
-import { useState } from 'react'
+import { Tv, Calendar, User, Settings, Film, Clapperboard, LogOut } from 'lucide-react'
 
 export default function Navigation() {
   const pathname = usePathname()
   const { user, logout } = useAuth()
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   if (!user) return null
 

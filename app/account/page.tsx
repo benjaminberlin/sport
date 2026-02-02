@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useAuth } from '@/contexts/AuthContext'
 import ProtectedRoute from '@/components/ProtectedRoute'
 import Navigation from '@/components/Navigation'
@@ -27,12 +27,22 @@ export default function AccountPage() {
   const [passwordSuccess, setPasswordSuccess] = useState(false)
   const [redeemError, setRedeemError] = useState('')
   const [loading, setLoading] = useState(false)
+  const passwordTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     if (token && showHistory) {
       fetchTransactions()
     }
   }, [token, showHistory])
+
+  useEffect(() => {
+    // Cleanup timer on unmount
+    return () => {
+      if (passwordTimerRef.current) {
+        clearTimeout(passwordTimerRef.current)
+      }
+    }
+  }, [])
 
   const fetchTransactions = async () => {
     try {
@@ -98,7 +108,7 @@ export default function AccountPage() {
       setPasswordSuccess(true)
       setCurrentPassword('')
       setNewPassword('')
-      setTimeout(() => setShowPasswordForm(false), 2000)
+      passwordTimerRef.current = setTimeout(() => setShowPasswordForm(false), 2000)
     } catch (error) {
       setPasswordError('Fehler beim Ändern des Passworts')
     } finally {

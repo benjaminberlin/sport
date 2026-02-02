@@ -132,7 +132,7 @@ export default function MoviesPage() {
                   <h2 className="text-2xl font-bold text-white mb-2">{selectedMovie.title}</h2>
                   <div className="flex items-center gap-4 text-zinc-400 text-sm mb-4">
                     {selectedMovie.year && <span>{selectedMovie.year}</span>}
-                    {selectedMovie.duration && <span>{Math.floor(selectedMovie.duration / 60)} min</span>}
+                    {selectedMovie.duration && <span>{selectedMovie.duration} min</span>}
                   </div>
                   {selectedMovie.description && (
                     <p className="text-zinc-300 mb-4">{selectedMovie.description}</p>

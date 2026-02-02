@@ -51,7 +51,8 @@ export default function LiveTVPage() {
   useEffect(() => {
     if (remainingMinutes <= 30 && remainingMinutes > 0 && !showWarning) {
       setShowWarning(true)
-      setTimeout(() => setShowWarning(false), 30000)
+      const timer = setTimeout(() => setShowWarning(false), 30000)
+      return () => clearTimeout(timer)
     }
   }, [remainingMinutes, showWarning])
 
