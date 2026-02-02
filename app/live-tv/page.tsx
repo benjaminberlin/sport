@@ -49,11 +49,11 @@ export default function LiveTVPage() {
   }, [selectedChannel, token])
 
   useEffect(() => {
-    if (remainingMinutes === 30 && !showWarning) {
+    if (remainingMinutes <= 30 && remainingMinutes > 0 && !showWarning) {
       setShowWarning(true)
       setTimeout(() => setShowWarning(false), 30000)
     }
-  }, [remainingMinutes])
+  }, [remainingMinutes, showWarning])
 
   const fetchChannels = async () => {
     try {

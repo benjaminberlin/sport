@@ -62,7 +62,7 @@ export default function VideoPlayer({ src, hasValidPass, remainingMinutes, onWar
         </div>
       )}
 
-      {hasValidPass && remainingMinutes > 0 && remainingMinutes <= 3 && (
+      {hasValidPass && remainingMinutes > 0 && remainingMinutes <= 30 && (
         <div className="absolute inset-0 backdrop-blur-[2px] pointer-events-none" />
       )}
     </div>
